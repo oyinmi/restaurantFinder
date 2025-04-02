@@ -2,6 +2,8 @@
 This is a sample android app to find the nearest restaurant based on the postcode provided
 
 ### Demo
+https://github.com/user-attachments/assets/6b73be73-42be-4df1-8a6d-b1da81d9fcd4
+
 
 
 ### How to Run
