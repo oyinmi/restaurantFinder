@@ -1,7 +1,6 @@
 package com.oluwatomi.restaurantfinder.ui.view
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
@@ -16,7 +15,6 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Cancel
-import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.SearchOff
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,6 +26,7 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -37,24 +36,15 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.oluwatomi.restaurantfinder.R
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import com.oluwatomi.restaurantfinder.data.models.Restaurant
-import com.oluwatomi.restaurantfinder.data.models.getRestaurants
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateListOf
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.TextUnit
+import com.oluwatomi.restaurantfinder.data.viewModel.RestaurantViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 
 
 @Composable
-fun RestaurantFinder() {
-    var restaurants = remember { mutableStateListOf<Restaurant>() }
-    var postcode by remember { mutableStateOf<String>("") }
-    var loading by remember { mutableStateOf<Boolean>(false) }
-    var hasSearched by remember { mutableStateOf<Boolean>(false) }
-    var hasPostCodeError by remember { mutableStateOf<Boolean>(false) }
+fun RestaurantFinder(restaurantViewModel: RestaurantViewModel = viewModel()) {
+    val restaurants by restaurantViewModel.restaurant.collectAsState()
 
     Column(
         verticalArrangement = Arrangement.Top,
@@ -69,8 +59,8 @@ fun RestaurantFinder() {
         )
         Row(Modifier.fillMaxWidth().padding(12.dp)) {
             OutlinedTextField(
-                value = postcode,
-                onValueChange = { postcode = it },
+                value = restaurantViewModel.postcode,
+                onValueChange = { restaurantViewModel.updatePostcode(it) },
                 label = {
                     Text(
                         text = stringResource(id = R.string.label),
@@ -81,7 +71,7 @@ fun RestaurantFinder() {
                     unfocusedContainerColor = Color.White,
                 ),
                 supportingText = {
-                    if (hasPostCodeError) {
+                    if (restaurantViewModel.hasPostCodeError) {
                         Text(
                             text = "Enter a valid postcode",
                             color = MaterialTheme.colorScheme.error
@@ -90,26 +80,29 @@ fun RestaurantFinder() {
                 },
                 singleLine = true,
                 maxLines = 1,
-                isError = hasPostCodeError,
+                isError = restaurantViewModel.hasPostCodeError,
                 trailingIcon = {
                     IconButton(onClick = {
-                        postcode = ""
-                        hasPostCodeError = false
+                        restaurantViewModel.updatePostcode("")
+                        restaurantViewModel.updateHasPostcodeError(false)
                     }) {
-                        Icon(Icons.Filled.Cancel, "error has occurred", tint = if (hasPostCodeError) MaterialTheme.colorScheme.error else Color.Unspecified)
+                        Icon(
+                            Icons.Filled.Cancel,
+                            "error has occurred",
+                            tint = if (restaurantViewModel.hasPostCodeError) MaterialTheme.colorScheme.error else Color.Unspecified)
                     }
                  }
             )
             Button(
                 onClick = {
-                    if (hasPostCodeError) {
-                        hasPostCodeError = false;
+                    if (restaurantViewModel.hasPostCodeError) {
+                        restaurantViewModel.updateHasPostcodeError(false)
                     }
-                    if (postcode.trim().length < 3) {
-                        hasPostCodeError = true
+                    if (restaurantViewModel.postcode.trim().length < 3) {
+                        restaurantViewModel.updateHasPostcodeError(true)
                     } else {
-                        hasSearched = true
-                        restaurants.addAll(getRestaurants())
+                        restaurantViewModel.updateHasSearched(true)
+                        restaurantViewModel.updateRestaurants()
                     }
                 },
                 colors = ButtonDefaults.buttonColors(Color(0XFFE86051)),
@@ -135,14 +128,14 @@ fun RestaurantFinder() {
             ) {
                 Icon(Icons.Filled.SearchOff, "no search result", modifier = Modifier.size(64.dp))
                 Text(
-                    text = if (!hasSearched) "Enter your postcode to get a list of restaurant" else "No search result",
+                    text = if (!restaurantViewModel.hasSearched) "Enter your postcode to get a list of restaurant" else "No search result",
                     fontSize = 32.sp,
                     textAlign = TextAlign.Center
                 )
             }
         }
 
-        if (loading){
+        if (restaurantViewModel.loading){
             CircularProgressIndicator(modifier = Modifier.size(64.dp).padding(top = 32.dp))
         }
 
