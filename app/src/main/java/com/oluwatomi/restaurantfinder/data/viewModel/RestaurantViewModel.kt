@@ -5,8 +5,8 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.oluwatomi.restaurantfinder.data.api.RestaurantApi
 import com.oluwatomi.restaurantfinder.data.models.Restaurant
-import com.oluwatomi.restaurantfinder.data.models.getRestaurants
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -30,21 +30,31 @@ class RestaurantViewModel: ViewModel() {
     val restaurant: StateFlow<List<Restaurant>> = _restaurant.asStateFlow()
 
     fun updateRestaurants() {
-        viewModelScope.launch {
-            val restaurantResponse: List<Restaurant> = getRestaurants()
-            _restaurant.value = restaurantResponse.subList(0, if (restaurantResponse.size > 10) 10 else restaurantResponse.size)
+        if (postcode.trim().length >= 3) {
+            viewModelScope.launch {
+                try {
+                    loading = true
+                    val response = RestaurantApi.retrofitService.getRestaurants(postcode.trim())
+                    val restaurantResponse = response.restaurants
+                    _restaurant.value = restaurantResponse.subList(0, if (restaurantResponse.size > 10) 10 else restaurantResponse.size)
+                } catch (e: Exception) {
+                    _restaurant.value = emptyList<Restaurant>()
+                } finally {
+                    loading = false
+                }
+            }
         }
     }
 
     fun updatePostcode(newPostCode: String) {
-        postcode = newPostCode;
+        postcode = newPostCode
     }
 
     fun updateHasSearched(newHasSearch: Boolean) {
-        hasSearched = newHasSearch;
+        hasSearched = newHasSearch
     }
 
     fun updateHasPostcodeError(newHasPostCodeError: Boolean) {
-        hasPostCodeError = newHasPostCodeError;
+        hasPostCodeError = newHasPostCodeError
     }
 }

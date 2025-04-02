@@ -120,7 +120,7 @@ fun RestaurantFinder(restaurantViewModel: RestaurantViewModel = viewModel()) {
                 )
             }
         }
-        if (restaurants.isEmpty()){
+        if (!restaurantViewModel.loading && restaurants.isEmpty()){
             Column(
                 verticalArrangement = Arrangement.Top,
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -139,7 +139,7 @@ fun RestaurantFinder(restaurantViewModel: RestaurantViewModel = viewModel()) {
             CircularProgressIndicator(modifier = Modifier.size(64.dp).padding(top = 32.dp))
         }
 
-        if (restaurants.isNotEmpty()) {
+        if (!restaurantViewModel.loading && restaurants.isNotEmpty()) {
             LazyColumn() {
                 items(restaurants) {restaurant ->
                     RestaurantCard(restaurant)
