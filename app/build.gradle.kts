@@ -63,4 +63,5 @@ dependencies {
     implementation(libs.kotlinx.json.serialiser)
     implementation(libs.kotlinx.serialization.converter)
     implementation(libs.squareup.okhttp)
+    implementation(libs.coil.compose)
 }

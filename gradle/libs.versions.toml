@@ -13,6 +13,7 @@ jsonSerialisation = "1.6.3"
 jsonSerialisationPlugin = "1.8.10"
 okhttp = "4.11.0"
 kotlinxConverter = "2.11.0"
+coil = "2.4.0"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -35,6 +36,7 @@ retrofit-core = { group = "com.squareup.retrofit2", name = "retrofit", version.r
 kotlinx-json-serialiser = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "jsonSerialisation" }
 squareup-okhttp = { group = "com.squareup.okhttp3", name = "okhttp", version.ref = "okhttp" }
 kotlinx-serialization-converter= { group = "com.squareup.retrofit2", name = "converter-kotlinx-serialization", version.ref = "kotlinxConverter" }
+coil-compose= { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

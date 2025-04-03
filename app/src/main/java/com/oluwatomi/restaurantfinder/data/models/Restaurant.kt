@@ -23,6 +23,7 @@ data class Cuisine(
 data class Restaurant(
     val id: String,
     val name: String,
+    val logoUrl: String,
     val cuisines: List<Cuisine>,
     val rating: Rating,
     val address: Address,
