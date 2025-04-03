@@ -11,6 +11,7 @@ https://github.com/user-attachments/assets/aa91ba23-1c0e-4704-aa09-102dce9f1210
 - User will enter a valid UK postcode
 - API response shape will not change
 - API data points will always have data and in the right data type
+- Assume that a valid postcode starts from three characters
 
 ### Improvements
 - Adding UI and Unit tests
