@@ -5,30 +5,49 @@ This is a sample android app to find the nearest restaurant based on the postcod
 ### Demo
 https://github.com/user-attachments/assets/536d80c9-b3b4-459a-a6e6-5ed6c74b4c4a
 
+### Assumptions
+- App users will be using device with android version 14 and any newer version
+- User will enter a valid UK postcode
+- API response shape will not change
+- API data points will always have data and in the right data type
+
+### Improvements
+- Adding UI and Unit tests
+- Extract postcode validation inside viewmodel
+- Implement a better postcode validation that will make sure the postcode actually exist
+- Design a better UI and advance search methods
+- Handle exception error from api call better
+- Adding image to the restaurant information for better user display
+- Adding error monitoring mechanism for errors in the application
+- Implementing default list of restaurant based on user's location
+- Making the app accessible
+
+### Features
+- Search functionality by postcode
+- View restaurant information
+- List top 10 searched restaurant
+
+### Methodology
+- UI built with Jetpack Compose
+- Architecture is based on MVVM approach
+- API implementation is done using Retrofit
 
 ### How to Run
 To run the application, follow the following
-- Step 1
-Clone the repo
-```
-git clone git@github.com:oyinmi/restaurantFinder.git
-```
+1. Clone the restaurant finder repository
+    Clone the repository by running this command
+    ```
+    git clone git@github.com:oyinmi/restaurantFinder.git
+    ```
 
-- Step 2
-Sync the gradle by pressing the button on the android studio
-![Screenshot 2025-04-02 at 16 33 28](https://github.com/user-attachments/assets/cb608f8a-b58d-4d5d-bddc-42389529a69d)
+2. Gradle Synchronisation
+    - Open the cloned project using android studio software, make sure android sdk is setup properly
+    - Sync the gradle by pressing the gradle button on the top right of android studio as seen in the picture below
+    ![Screenshot 2025-04-02 at 16 33 28](https://github.com/user-attachments/assets/cb608f8a-b58d-4d5d-bddc-42389529a69d)
 
-- Step 3
-Run the app by pressing the play button in android studio
-![Screenshot 2025-04-02 at 16 38 18](https://github.com/user-attachments/assets/b1594992-aac4-4203-ae73-ab87800bed9c)
+3. Running the app
+    - Download and setup android virtual device which is used to create an emulator for running the app
+    - Run the app by selecting the desired emulator and click on the run button as shown in the picture below
+    ![Screenshot 2025-04-02 at 16 38 18](https://github.com/user-attachments/assets/b1594992-aac4-4203-ae73-ab87800bed9c)
 
 
-### Improvements
-- Extract postcode validation inside viewmodel
-- Implement a better postcode validation that will make sure the postcode actually exist
-- Design a better UI
-- Handle exception error from api call better
-
-### Assumption
-- User will enter real postcode
-- Api response shape will not change
