@@ -3,7 +3,8 @@ This is a sample android app to find the nearest restaurant based on the postcod
 
 
 ### Demo
-https://github.com/user-attachments/assets/536d80c9-b3b4-459a-a6e6-5ed6c74b4c4a
+https://github.com/user-attachments/assets/aa91ba23-1c0e-4704-aa09-102dce9f1210
+
 
 ### Assumptions
 - App users will be using device with android version 14 and any newer version
