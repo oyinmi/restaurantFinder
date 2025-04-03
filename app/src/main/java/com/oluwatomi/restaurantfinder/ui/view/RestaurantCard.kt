@@ -18,11 +18,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.oluwatomi.restaurantfinder.R
 import com.oluwatomi.restaurantfinder.data.models.Restaurant
 
 
@@ -45,22 +47,22 @@ fun RestaurantCard(restaurant: Restaurant) {
                         .data(restaurant.logoUrl)
                         .crossfade(true)
                         .build(),
-                    contentDescription = "restaurant image",
+                    contentDescription = stringResource(id = R.string.restaurantImageDescription),
                     contentScale = ContentScale.Crop,
                     modifier = Modifier.padding(end = 8.dp)
                 )
                 Text(restaurant.name, fontWeight = FontWeight.Bold, fontSize = 18.sp)
             }
             Row {
-                Icon(Icons.Filled.Fastfood, "restaurant menu")
+                Icon(Icons.Filled.Fastfood, stringResource(id = R.string.restaurantIconDescription))
                 Text(restaurant.cuisines.joinToString { it.name }, fontSize = 16.sp, modifier = Modifier.padding(start = 4.dp))
             }
             Row {
-                Icon(Icons.Filled.Star, "restaurant rating", tint = Color(0XFFBF9000))
+                Icon(Icons.Filled.Star, stringResource(id = R.string.ratingIconDescription), tint = Color(0XFFBF9000))
                 Text("${restaurant.rating.starRating}", fontSize = 16.sp)
             }
             Row {
-                Icon(Icons.Filled.LocationOn, "restaurant location", tint = Color(0XFFCC0000))
+                Icon(Icons.Filled.LocationOn, stringResource(id = R.string.locationIconDescription), tint = Color(0XFFCC0000))
                 Text("${restaurant.address.firstLine}, ${restaurant.address.city}, ${restaurant.address.postalCode}", fontSize = 16.sp)
             }
 

@@ -73,7 +73,7 @@ fun RestaurantFinder(restaurantViewModel: RestaurantViewModel = viewModel()) {
                 supportingText = {
                     if (restaurantViewModel.hasPostCodeError) {
                         Text(
-                            text = "Enter a valid postcode",
+                            text = stringResource(id = R.string.postcodeError),
                             color = MaterialTheme.colorScheme.error
                         )
                     }
@@ -115,7 +115,7 @@ fun RestaurantFinder(restaurantViewModel: RestaurantViewModel = viewModel()) {
                     )
             ) {
                 Text(
-                    text = "Search",
+                    text = stringResource(id = R.string.buttonText),
                     fontSize = 15.sp,
                 )
             }
@@ -126,9 +126,12 @@ fun RestaurantFinder(restaurantViewModel: RestaurantViewModel = viewModel()) {
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth().background(Color(0xfff0f4fa)).padding(top = 32.dp)
             ) {
-                Icon(Icons.Filled.SearchOff, "no search result", modifier = Modifier.size(64.dp))
+                Icon(Icons.Filled.SearchOff, stringResource(id = R.string.searchOffIconDescription), modifier = Modifier.size(64.dp))
                 Text(
-                    text = if (!restaurantViewModel.hasSearched) "Enter your postcode to get a list of restaurant" else "No search result",
+                    text = if (!restaurantViewModel.hasSearched)
+                        stringResource(id = R.string.restaurantLandingScreenText)
+                    else
+                        stringResource(id = R.string.searchOffIconDescription),
                     fontSize = 32.sp,
                     textAlign = TextAlign.Center
                 )

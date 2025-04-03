@@ -17,7 +17,6 @@ https://github.com/user-attachments/assets/536d80c9-b3b4-459a-a6e6-5ed6c74b4c4a
 - Implement a better postcode validation that will make sure the postcode actually exist
 - Design a better UI and advance search methods
 - Handle exception error from api call better
-- Move all strings or text into `strings.xml` inside `res > values` folder
 - Adding error monitoring mechanism for errors in the application
 - Implementing default list of restaurant based on user's location
 - Making the app accessible

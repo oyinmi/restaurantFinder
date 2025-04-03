@@ -2,4 +2,12 @@
     <string name="app_name">Restaurant Finder</string>
     <string name="title">Restaurant Finder</string>
     <string name="label">Enter Postcode</string>
+    <string name="postcodeError">Enter a valid postcode</string>
+    <string name="buttonText">Search</string>
+    <string name="restaurantImageDescription">restaurant image</string>
+    <string name="restaurantIconDescription">restaurant menu</string>
+    <string name="ratingIconDescription">restaurant rating</string>
+    <string name="locationIconDescription">restaurant location</string>
+    <string name="searchOffIconDescription">no search result</string>
+    <string name="restaurantLandingScreenText">Enter your postcode to get a list of restaurant</string>
 </resources>
